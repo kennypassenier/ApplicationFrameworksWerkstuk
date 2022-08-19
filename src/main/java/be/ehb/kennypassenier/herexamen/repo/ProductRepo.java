@@ -1,9 +1,9 @@
-package be.ehb.kennypassenier.herexamen.dao;
+package be.ehb.kennypassenier.herexamen.repo;
 
 import be.ehb.kennypassenier.herexamen.models.Product;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ProductDAO  extends CrudRepository<Product, Integer> {
+public interface ProductRepo extends CrudRepository<Product, Integer> {
     // Extra functie toevoegen om op categorie te zoeken
     // Kan dankzij CRUD repo makkelijk worden uitgebreid als we de juiste syntax volgen
     // find -> select statement
