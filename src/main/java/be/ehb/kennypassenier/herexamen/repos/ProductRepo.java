@@ -1,6 +1,6 @@
-package be.ehb.kennypassenier.herexamen.repo;
+package be.ehb.kennypassenier.herexamen.repos;
 
-import be.ehb.kennypassenier.herexamen.models.Product;
+import be.ehb.kennypassenier.herexamen.entities.Product;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ProductRepo extends CrudRepository<Product, Integer> {

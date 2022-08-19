@@ -1,4 +1,4 @@
-package be.ehb.kennypassenier.herexamen.models;
+package be.ehb.kennypassenier.herexamen.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
