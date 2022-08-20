@@ -17,10 +17,10 @@ async function main(){
 }
 
 async function getDeliveriesByName(username){
-  var myHeaders = new Headers();
+  let myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${JWT}`);  
 
-  var requestOptions = {
+  let requestOptions = {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
@@ -133,7 +133,7 @@ function populateDeliveredTable(deliveredItems){
 
 
 async function postDelivery(item){
-  var myHeaders = new Headers();
+  let myHeaders = new Headers();
   myHeaders.append("type", "application/json");  
   myHeaders.append("Authorization", `Bearer ${JWT}`);
 
@@ -142,14 +142,14 @@ async function postDelivery(item){
   console.log(USER, item.price, item.name);
   
   
-  var raw = JSON.stringify({
+  let raw = JSON.stringify({
     "owner": USER,
     "price": item.price,
     "productName": item.name
   });
   console.log(raw);
   
-  var requestOptions = {
+  let requestOptions = {
     method: 'POST',
     headers: myHeaders,
     body: raw,

@@ -1,9 +1,10 @@
 let AllProducts = [];
 const productsTableBody = document.querySelector("#productsTableBody");
+const filterParent = document.querySelector("#filterParent");
 const categories = [];
 
 async function getAllProducts(){
-  var myHeaders = new Headers();
+  let myHeaders = new Headers();
   myHeaders.append("type", "application/json");
   myHeaders.append("Access-Control-Allow-Origin", "*")
   myHeaders.append("Content-Type", "application/json");
@@ -23,8 +24,7 @@ async function getAllProducts(){
     return;
   }
 
-  const data = await response.json();
-  
+  const data = await response.json();  
   // Voor we de data teruggeven, vullen we de categories array
   // Met alle mogelijkheden
   data.forEach((product) => {
@@ -32,12 +32,13 @@ async function getAllProducts(){
       categories.push(product.category);
     }
   });
-  console.log(categories);
-  
+  console.log(categories);  
   return data;
 }
 
 function populateProducts(products){
+
+  console.log(products);
   // Hier vullen we een tabel met alle producten
   // Eerst alles leegmaken
   productsTableBody.innerHTML = "";
@@ -101,7 +102,65 @@ async function main(){
   if(allProducts && allProducts.length > 0){
     AllProducts = allProducts;
     populateProducts(AllProducts);
+    createFilterButtons();
   }
+}
+
+function createFilterButtons(){
+  filterParent.innerHTML = "";
+  for(let category of categories){
+    // Voor elke categorie maken we een knop aan om te filteren
+    let filterButton = document.createElement("button");
+    filterButton.textContent = category;
+    filterButton.classList = "btn btn-lg btn-secondary";
+
+    filterButton.addEventListener("click", function(e){
+      filterContent(this.textContent);
+    });
+
+    filterParent.appendChild(filterButton);
+  }
+  let removeFilterButton = document.createElement("button");
+  removeFilterButton.textContent = "Bekijk alles";
+  removeFilterButton.classList = "btn btn-lg btn-secondary";
+  removeFilterButton.addEventListener("click", function(e){
+    filterContent();
+  });
+  filterParent.appendChild(removeFilterButton);
+}
+
+async function filterContent(filter){
+  if(filter == undefined){
+    console.log("Filter staat terug uit");
+    populateProducts(AllProducts);
+  }
+  else{
+    console.log(`We filteren op ${filter}`);
+    let products = await getProductsByCategory(filter);
+    populateProducts(products);
+  }
+}
+
+async function getProductsByCategory(category){
+  let myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${JWT}`);
+  
+
+  let requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  const newUrl = `http://localhost:8080/products/category/${category}`;
+  console.log(newUrl, JWT);
+  const response = await fetch(newUrl, requestOptions)
+  if(!response.ok){
+    const message = `An error has occured: ${response.status}`;
+    console.error(message);
+    return;
+  }
+  const data = await response.json();
+  return data;
 }
 
 main();

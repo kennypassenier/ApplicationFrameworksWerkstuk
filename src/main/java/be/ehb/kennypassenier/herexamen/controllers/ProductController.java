@@ -7,6 +7,7 @@ import be.ehb.kennypassenier.herexamen.repos.ProductDao;
 import be.ehb.kennypassenier.herexamen.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,7 @@ public class ProductController {
     }
     @CrossOrigin(origins = "*")
     @PostMapping("products")
+    @PreAuthorize("hasRole('Admin')")
     @ResponseStatus(HttpStatus.OK)
     // Parameters meegeven die relevant zijn om het object aan te maken
     public void addProduct(@RequestParam("name") String name,
@@ -65,6 +67,7 @@ public class ProductController {
 
     @CrossOrigin(origins = "*")
     @DeleteMapping("products")
+    @PreAuthorize("hasRole('Admin')")
     @ResponseStatus(HttpStatus.OK)
     public void deleteProduct(@RequestParam("id") int id){
         productDao.deleteById(id);

@@ -9,13 +9,13 @@ const city = document.querySelector("#cityInput");
 const postalCode = document.querySelector("#postalCodeInput");
 
 async function register(){
-  var myHeaders = new Headers();
+  let myHeaders = new Headers();
   myHeaders.append("type", "application/json");
   myHeaders.append("Access-Control-Allow-Origin", "*")
   myHeaders.append("Content-Type", "application/json");
   
 
-  var raw = JSON.stringify({
+  let raw = JSON.stringify({
     "userName": username.value,
     "firstName": firstName.value,
     "lastName": lastName.value,
@@ -26,7 +26,7 @@ async function register(){
     "postalCode": postalCode.value
   });
 
-  var requestOptions = {
+  let requestOptions = {
     method: 'POST',
     headers: myHeaders,
     body: raw,
