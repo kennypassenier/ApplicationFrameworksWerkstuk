@@ -8,15 +8,6 @@ http://localhost:8080/forUsersOnly doet hetzelfde maar is alleen beschikbaar voo
 http://localhost:8080/products/{id} is een DELETE request die enkel de admin kan bereiken
 http://localhost:8080/products/ is een POST request die enkel de admin kan bereiken
 
-
-## Functionele vereisten
-•	Mogelijkheid om alle producten weer te geven in een catalogus 
-•	Mogelijkheid om enkel producten van een specifieke categorie weer te geven (voeding, speelgoed, habitat), de voor jou relevante filters 
-•	Toevoegen product aan winkelmandje 
-•	Aankoop bevestigen (checkout systeem)
-•	Een registratiesysteem voor users
-•	Een veilig login systeem (oauth2, salting, bcrypt, mogelijkheden genoeg)
-
 ###	Mogelijkheid om alle producten weer te geven in een catalogus 
 
 De index.html pagina geeft een overzicht van alle items.
