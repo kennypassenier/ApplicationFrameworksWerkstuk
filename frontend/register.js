@@ -31,7 +31,6 @@ async function register(){
     headers: myHeaders,
     body: raw,
     redirect: 'follow',
-    "mode": "no-cors",
   };
 
   const response = await fetch("http://localhost:8080/registerNewUser", requestOptions)
