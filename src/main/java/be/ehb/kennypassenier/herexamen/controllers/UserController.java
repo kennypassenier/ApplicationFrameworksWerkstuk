@@ -4,10 +4,7 @@ import be.ehb.kennypassenier.herexamen.entities.User;
 import be.ehb.kennypassenier.herexamen.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 
@@ -24,19 +21,21 @@ public class UserController {
     public void seedRolesAndUsers(){
         userService.seedRolesAndUser();
     }
-
+    @CrossOrigin(origins = "*")
     @PostMapping({"/registerNewUser"})
     public User registerNewUser(@RequestBody User user){
         return userService.registerNewUser(user);
     }
 
-    @GetMapping({"/forAdmin"})
+
+    @CrossOrigin(origins = "*")
+    @GetMapping({"/forAdminsOnly"})
     @PreAuthorize("hasRole('Admin')")
     public String forAdmin(){
         return "This URL is only for admins";
     }
-
-    @GetMapping({"/forUser"})
+    @CrossOrigin(origins = "*")
+    @GetMapping({"/forUsersOnly"})
     @PreAuthorize("hasRole('User')")
     public String forUser(){
         return "This URL is only for users";

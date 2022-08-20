@@ -1,0 +1,11 @@
+.login{
+  background: #DB5461;
+  color: white;
+  padding: 1em;
+  display: none;
+}
+#logoutLink,
+#loginLink,
+#registerLink{
+  display: none;
+}
